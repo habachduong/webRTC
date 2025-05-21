@@ -1,14 +1,10 @@
 import React from 'react';
 import './header.scss';
-import hamburgerMenu from '../../asset/hamburger menu.png';
 
-const Header = ({ title, onMenuClick }) => {
+const Header = ({ title }) => {
   return (
     <header className="header">
       <div className="header-left">
-        <button className="menu-button" onClick={onMenuClick}>
-          <img src={hamburgerMenu} alt="Menu" />
-        </button>
         <h1>{title}</h1>
       </div>
       <div className="header-right">
@@ -18,4 +14,4 @@ const Header = ({ title, onMenuClick }) => {
   );
 };
 
-export default Header; 
+export default Header;

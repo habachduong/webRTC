@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { setMenuActive } from '../../reducers/dashboard';
@@ -20,6 +20,7 @@ import { ReactComponent as BillingIcon } from '../../asset/svg/billing.svg';
 import { ReactComponent as QueueReportIcon } from '../../asset/svg/queue-report.svg';
 import { ReactComponent as ServiceReportIcon } from '../../asset/svg/service-report.svg';
 import { ReactComponent as ArrowDown } from '../../asset/svg/arrow-down.svg';
+import logo from '../../asset/logo.png';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -30,8 +31,48 @@ const Sidebar = () => {
   const { user } = useSelector((state) => state.user);
   const [adminMenuOpen, setAdminMenuOpen] = useState(false);
   const [reportMenuOpen, setReportMenuOpen] = useState(false);
+  const [activeKey, setActiveKey] = useState('');
 
   const isAdmin = user?.role === 'admin';
+
+  // Theo dõi thay đổi của pathname để cập nhật activeKey
+  useEffect(() => {
+    // Xác định menu item nào đang active dựa trên pathname
+    if (pathname === '/dashboard') {
+      setActiveKey('dashboard');
+    } else if (pathname === '/form') {
+      setActiveKey('profile');
+    } else if (pathname === '/setting') {
+      setActiveKey('setting');
+    } else if (pathname.startsWith('/admin/trunk')) {
+      setActiveKey('trunk');
+      setAdminMenuOpen(true);
+    } else if (pathname.startsWith('/admin/service')) {
+      setActiveKey('service');
+      setAdminMenuOpen(true);
+    } else if (pathname.startsWith('/admin/sip')) {
+      setActiveKey('sip');
+      setAdminMenuOpen(true);
+    } else if (pathname.startsWith('/admin/queue')) {
+      setActiveKey('queue');
+      setAdminMenuOpen(true);
+    } else if (pathname.startsWith('/reports/cdr')) {
+      setActiveKey('cdr-logs');
+      setReportMenuOpen(true);
+    } else if (pathname.startsWith('/reports/billing')) {
+      setActiveKey('billing');
+      setReportMenuOpen(true);
+    } else if (pathname.startsWith('/reports/queue')) {
+      setActiveKey('queue-report');
+      setReportMenuOpen(true);
+    } else if (pathname.startsWith('/reports/service')) {
+      setActiveKey('service-report');
+      setReportMenuOpen(true);
+    }
+    
+    // Cập nhật menuActive trong Redux để đồng bộ
+    dispatch(setMenuActive(activeKey));
+  }, [pathname, dispatch]);
 
   const menuItems = [
     {
@@ -109,6 +150,7 @@ const Sidebar = () => {
   ];
 
   const handleMenuClick = (key, path) => {
+    setActiveKey(key);
     dispatch(setMenuActive(key));
     navigate(path);
   };
@@ -132,7 +174,7 @@ const Sidebar = () => {
           {items.map((item) => (
             <div
               key={item.key}
-              className={`submenu-item ${menuActive === item.key ? 'active' : ''}`}
+              className={`submenu-item ${activeKey === item.key ? 'active mm-active' : ''}`}
               onClick={() => handleMenuClick(item.key, item.path)}
             >
               <item.icon className="icon" />
@@ -148,7 +190,7 @@ const Sidebar = () => {
   return (
     <div className={`sidebar ${collapse ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
-        <img src="assets/images/logo.png" height="60" alt="Logo" className="logo" />
+        <img src={logo} alt="Logo" className="logo" />
         {!collapse && <span className="title">TeleSystem</span>}
       </div>
 
@@ -156,7 +198,7 @@ const Sidebar = () => {
         {menuItems.map((item) => (
           <div
             key={item.key}
-            className={`menu-item ${menuActive === item.key ? 'active' : ''}`}
+            className={`menu-item ${activeKey === item.key ? 'active mm-active' : ''}`}
             onClick={() => handleMenuClick(item.key, item.path)}
           >
             <item.icon className="icon" />
@@ -167,7 +209,9 @@ const Sidebar = () => {
         {/* Report Menu */}
         <div className="menu-group">
           <div 
-            className={`menu-item group-header ${reportMenuOpen ? 'open' : ''}`}
+            className={`menu-item group-header ${reportMenuOpen ? 'open' : ''} ${
+              ['cdr-logs', 'billing', 'queue-report', 'service-report'].includes(activeKey) ? 'mm-active' : ''
+            }`}
             onClick={toggleReportMenu}
           >
             <ReportIcon className="icon" />
@@ -187,7 +231,9 @@ const Sidebar = () => {
         {isAdmin && (
           <div className="menu-group">
             <div 
-              className={`menu-item group-header ${adminMenuOpen ? 'open' : ''}`}
+              className={`menu-item group-header ${adminMenuOpen ? 'open' : ''} ${
+                ['trunk', 'service', 'sip', 'queue'].includes(activeKey) ? 'mm-active' : ''
+              }`}
               onClick={toggleAdminMenu}
             >
               <AdminIcon className="icon" />

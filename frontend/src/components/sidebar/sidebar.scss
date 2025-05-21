@@ -41,9 +41,14 @@ $white-opacity: rgba(255, 255, 255, 0.7);
         display: none;
       }
     }
+    .sidebar-header {
+      padding: 5px;
+      padding-bottom: 20px;
+    }    
     .group-header {
       padding: 5px;
     }
+
     .menu-item {
       justify-content: center;
       padding: 5px;
@@ -66,7 +71,8 @@ $white-opacity: rgba(255, 255, 255, 0.7);
 
   .sidebar-header {
     height: 60px;
-    padding: 0 20px;
+    padding: 5px;
+    padding-bottom: 20px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -137,6 +143,21 @@ $white-opacity: rgba(255, 255, 255, 0.7);
           color: $white;
           font-weight: 500;
         }
+        
+        &.mm-active {
+          background: $main-dark-red;
+          color: $white;
+          font-weight: 600;
+          
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 4px;
+            height: 40px;
+            background: $white;
+          }
+        }
       }
 
       .submenu {
@@ -176,6 +197,21 @@ $white-opacity: rgba(255, 255, 255, 0.7);
               left: 0;
               width: 3px;
               height: 36px; /* Giảm kích thước */
+              background: $white;
+            }
+          }
+          
+          &.mm-active {
+            background: rgba(0, 0, 0, 0.2);
+            color: $white;
+            font-weight: 600;
+            
+            &::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              width: 4px;
+              height: 36px;
               background: $white;
             }
           }
@@ -224,6 +260,21 @@ $white-opacity: rgba(255, 255, 255, 0.7);
           background: $white;
         }
       }
+      
+      &.mm-active {
+        background: $main-dark-red;
+        color: $white;
+        font-weight: 600;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          width: 4px;
+          height: 40px;
+          background: $white;
+        }
+      }
     }
   }
 
@@ -257,19 +308,21 @@ $white-opacity: rgba(255, 255, 255, 0.7);
       }
     }
   }
+  .menu-item.active {
+    background-color: $main-dark-red;
+    
+    .icon {
+      color: $white;
+    }
+    
+    span {
+      color: $white;
+    }
+  }
+  
+
 }
 
-.menu-item.active {
-  background-color: $main-dark-red;
-  
-  .icon {
-    color: $white;
-  }
-  
-  span {
-    color: $white;
-  }
-}
 
 .arrow {
   margin-left: auto;
