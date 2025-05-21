@@ -221,7 +221,8 @@ $white-opacity: rgba(255, 255, 255, 0.7);
 
     .menu-item {
       height: 40px; /* Giảm kích thước */
-      padding: 0 20px;
+      padding: 5px;
+      padding-bottom: 20px;
       display: flex;
       align-items: center;
       cursor: pointer;
