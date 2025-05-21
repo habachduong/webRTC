@@ -19,17 +19,34 @@ $white-opacity: rgba(255, 255, 255, 0.7);
   overflow: visible; /* Loại bỏ scroll */
 
   &.collapsed {
-    width: 60px; /* Giảm 80% từ 75px */
+    width: 70px;
+
+    .icon {
+      width: 32px;
+      height: 32px;
+      margin-right: 0;
+      color: $white;
+    }
+    
+    .sidebar-header {
+      padding: 5px;
+      .logo {
+        width: 40px;
+        height: 40px;
+      }
+    }
 
     .sidebar-header {
       .title {
         display: none;
       }
     }
-
+    .group-header {
+      padding: 5px;
+    }
     .menu-item {
       justify-content: center;
-      padding: 12px 0;
+      padding: 5px;
 
       span {
         display: none;
@@ -85,24 +102,24 @@ $white-opacity: rgba(255, 255, 255, 0.7);
         color: $white;
         text-decoration: none;
 
-        img {
-          width: 20px;
-          height: 20px;
+        .icon {
+          width: 24px;
+          height: 24px;
           margin-right: 10px;
-          filter: brightness(0) invert(1); /* Make icons white */
+          color: $white;
+        }
 
-          &.arrow {
-            position: absolute;
-            right: 20px;
-            width: 12px;
-            height: 12px;
-            margin-right: 0;
-            transition: transform 0.3s ease;
-            filter: brightness(0) invert(1); /* Make icons white */
+        .arrow {
+          position: absolute;
+          right: 20px;
+          width: 12px;
+          height: 12px;
+          margin-right: 0;
+          transition: transform 0.3s ease;
+          color: $white;
 
-            &.rotate {
-              transform: rotate(180deg);
-            }
+          &.rotate {
+            transform: rotate(180deg);
           }
         }
 
@@ -136,11 +153,11 @@ $white-opacity: rgba(255, 255, 255, 0.7);
           color: $white-opacity;
           font-size: 13px;
 
-          img {
-            width: 16px;
-            height: 16px;
+          .icon {
+            width: 20px;
+            height: 20px;
             margin-right: 10px;
-            filter: brightness(0) invert(1); /* Make icons white */
+            color: $white;
           }
 
           &:hover {
@@ -180,12 +197,13 @@ $white-opacity: rgba(255, 255, 255, 0.7);
         width: 24px;
         height: 24px;
         margin-right: 12px;
-        color: var(--icon-color, #808191);
+        color: $white;
       }
 
       span {
         font-size: 14px;
         font-weight: 400;
+        color: $white;
       }
 
       &:hover {
@@ -242,14 +260,14 @@ $white-opacity: rgba(255, 255, 255, 0.7);
 }
 
 .menu-item.active {
-  background-color: rgba(255, 185, 173, 0.1);
+  background-color: $main-dark-red;
   
   .icon {
-    --icon-color: #FFB9AD;
+    color: $white;
   }
   
   span {
-    color: #FFB9AD;
+    color: $white;
   }
 }
 
@@ -258,7 +276,7 @@ $white-opacity: rgba(255, 255, 255, 0.7);
   width: 16px;
   height: 16px;
   transition: transform 0.3s ease;
-  color: var(--icon-color, #808191);
+  color: $white;
   
   &.rotate {
     transform: rotate(180deg);

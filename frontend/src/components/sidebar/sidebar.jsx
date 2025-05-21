@@ -20,7 +20,6 @@ import { ReactComponent as BillingIcon } from '../../asset/svg/billing.svg';
 import { ReactComponent as QueueReportIcon } from '../../asset/svg/queue-report.svg';
 import { ReactComponent as ServiceReportIcon } from '../../asset/svg/service-report.svg';
 import { ReactComponent as ArrowDown } from '../../asset/svg/arrow-down.svg';
-import logo from '../../asset/logo.png';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -149,7 +148,7 @@ const Sidebar = () => {
   return (
     <div className={`sidebar ${collapse ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
-        <img src={logo} alt="Logo" className="logo" />
+        <img src="assets/images/logo.png" height="60" alt="Logo" className="logo" />
         {!collapse && <span className="title">TeleSystem</span>}
       </div>
 
