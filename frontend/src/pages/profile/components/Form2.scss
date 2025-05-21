@@ -1,0 +1,109 @@
+.form2 {
+  .form2-title {
+    color: #1d1d1d;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 24px;
+  }
+  .form2-info {
+    display: flex;
+    box-sizing: border-box;
+    padding: 24px 32px 40px 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #f9f9f9;
+    margin-bottom: 20px;
+  }
+  .from2-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+  .contract-input {
+    width: 30%;
+  }
+  .from2-input {
+    width: 50% !important;
+  }
+  .form2-tab{
+    margin-bottom: 24px;
+  }
+  .form2-content {
+    .form2-tab {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      cursor: pointer;
+      .active {
+        color: #5f84d3;
+      }
+    }
+    .from2-tab-item {
+      color: #1d1d1d;
+      font-family: "Roboto", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+  .form2-tab-content {
+    width: 100%;
+  }
+  .form2-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .btn-active {
+      color: #fff;
+      background: #3bb347;
+    }
+  }
+  .from2-btn {
+    border-radius: 8px;
+    border: 1px solid #3bb347;
+    display: flex;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #3bb347;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    cursor: pointer;
+    img{
+      width: 14px;
+    }
+  }
+  .from2-select{
+    display: flex;
+    height: 30px;
+    padding: 0px 12px;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid #c5d7ee;
+    background: #fff;
+    &::placeholder {
+      color: #1d1d1d;
+      font-family: "Roboto", sans-serif;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+    &:focus-visible{
+      outline: none;
+    }
+  }
+}

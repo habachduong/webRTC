@@ -1,0 +1,15 @@
+.home{
+  box-sizing: border-box;
+  width: 100%;
+  // display: flex;
+  .home-body{
+    margin-left: 69px;
+  }
+  .home-content{
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    padding: 36px 23px;
+    gap: 20px;
+  }
+}

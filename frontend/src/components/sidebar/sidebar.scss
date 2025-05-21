@@ -1,0 +1,266 @@
+/* Biến màu */
+$main-red: #c10a11;
+$main-dark-red: darken(#c10a11, 5%);
+$white: #ffffff;
+$white-opacity: rgba(255, 255, 255, 0.7);
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px; /* Giảm 80% từ 250px */
+  background: $main-red;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: visible; /* Loại bỏ scroll */
+
+  &.collapsed {
+    width: 60px; /* Giảm 80% từ 75px */
+
+    .sidebar-header {
+      .title {
+        display: none;
+      }
+    }
+
+    .menu-item {
+      justify-content: center;
+      padding: 12px 0;
+
+      span {
+        display: none;
+      }
+    }
+
+    .submenu {
+      display: none;
+    }
+    
+    .collapse-btn {
+      background-color: $main-red;
+      right: -28px;
+      border-radius: 0 5px 5px 0;
+    }
+  }
+
+  .sidebar-header {
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      filter: brightness(0) invert(1); /* Make logo white */
+    }
+
+    .title {
+      margin-left: 10px;
+      font-size: 18px;
+      font-weight: 500;
+      color: $white;
+    }
+  }
+
+  .sidebar-menu {
+    flex: 1;
+    overflow: hidden; /* Loại bỏ scroll */
+    padding: 20px 0;
+
+    .menu-group {
+      .group-header {
+        position: relative;
+        height: 40px; /* Giảm kích thước */
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: $white;
+        text-decoration: none;
+
+        img {
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+          filter: brightness(0) invert(1); /* Make icons white */
+
+          &.arrow {
+            position: absolute;
+            right: 20px;
+            width: 12px;
+            height: 12px;
+            margin-right: 0;
+            transition: transform 0.3s ease;
+            filter: brightness(0) invert(1); /* Make icons white */
+
+            &.rotate {
+              transform: rotate(180deg);
+            }
+          }
+        }
+
+        span {
+          font-size: 14px;
+          font-weight: 400;
+        }
+
+        &:hover {
+          background: $main-dark-red;
+        }
+
+        &.open {
+          background: $main-dark-red;
+          color: $white;
+          font-weight: 500;
+        }
+      }
+
+      .submenu {
+        background: $main-dark-red;
+        padding: 5px 0;
+
+        .submenu-item {
+          height: 36px; /* Giảm kích thước */
+          padding: 0 20px 0 50px;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          color: $white-opacity;
+          font-size: 13px;
+
+          img {
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+            filter: brightness(0) invert(1); /* Make icons white */
+          }
+
+          &:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: $white;
+          }
+
+          &.active {
+            background: rgba(0, 0, 0, 0.2);
+            color: $white;
+            font-weight: 500;
+
+            &::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              width: 3px;
+              height: 36px; /* Giảm kích thước */
+              background: $white;
+            }
+          }
+        }
+      }
+    }
+
+    .menu-item {
+      height: 40px; /* Giảm kích thước */
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: $white;
+      text-decoration: none;
+
+      .icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        color: var(--icon-color, #808191);
+      }
+
+      span {
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      &:hover {
+        background: $main-dark-red;
+      }
+
+      &.active {
+        background: $main-dark-red;
+        color: $white;
+        font-weight: 500;
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          width: 3px;
+          height: 40px; /* Giảm kích thước */
+          background: $white;
+        }
+      }
+    }
+  }
+
+  .sidebar-footer {
+    height: 45px; /* Giảm kích thước */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+
+    .collapse-btn {
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: $main-red;
+      cursor: pointer;
+      color: $white;
+      font-size: 14px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      right: 15px;
+      transition: all 0.3s ease;
+      z-index: 1001;
+
+      &:hover {
+        background: $main-dark-red;
+      }
+    }
+  }
+}
+
+.menu-item.active {
+  background-color: rgba(255, 185, 173, 0.1);
+  
+  .icon {
+    --icon-color: #FFB9AD;
+  }
+  
+  span {
+    color: #FFB9AD;
+  }
+}
+
+.arrow {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+  color: var(--icon-color, #808191);
+  
+  &.rotate {
+    transform: rotate(180deg);
+  }
+} 

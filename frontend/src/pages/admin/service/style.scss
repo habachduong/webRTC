@@ -1,0 +1,17 @@
+.service-management {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .service-content {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+
+    h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+  }
+} 

@@ -1,0 +1,47 @@
+.infoCaller {
+  display: flex;
+  padding-bottom: 25px;
+  align-items: flex-start;
+  gap: 25px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  img{
+    width: 40px;
+  }
+  .infoCaller-phone {
+    opacity: 0.8;
+    color: #000;
+    font-family: "Roboto", sans-serif;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 10px;
+  }
+  .infoCaller-lh {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    p {
+      color: #000;
+      opacity: 0.6;
+      font-family: "Roboto", sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin: 0;
+    }
+    span {
+      margin: 0;
+      color: #000;
+      opacity: 0.4;
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+}

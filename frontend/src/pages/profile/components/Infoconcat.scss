@@ -1,0 +1,133 @@
+.infoConcat {
+  display: inline-flex;
+  padding: 21px 30px;
+  flex-direction: column;
+  align-items: center;
+  gap: 23px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: #fafcfe;
+  width: 22%;
+  p {
+    margin: 0;
+  }
+  span {
+    margin: 0;
+  }
+  strong {
+    margin: 0;
+  }
+  .infoConcat-title {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      color: #09254f;
+      font-family: "Roboto", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      opacity: 0.8;
+      margin: 0;
+    }
+    span {
+      color: #5f84d3;
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      margin: 0;
+    }
+  }
+  .infoConcat-content {
+    display: flex;
+    padding: 15px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    align-self: stretch;
+    border-radius: 12px;
+    background: #eaf6ff;
+  }
+  .infoConcat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    p {
+      color: #425572;
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin: 0;
+    }
+    span {
+      color: #0462f0;
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      margin: 0;
+    }
+  }
+  .infoConcat-history{
+    width: 100%;
+  }
+  .infoConcat-history-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+    margin-bottom: 20px;
+    p {
+      color: #465366;
+      font-family: "Roboto", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+  .infoConcat-history-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 23px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 23px 0;
+  }
+  .infoConcat-history-info {
+    
+    p {
+      color: #082249;
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 13px;
+    }
+    span {
+      color: #082249;
+      font-family: "Roboto", sans-serif;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      opacity: 0.5;
+    }
+    strong {
+      color: #082249;
+      font-family: "Roboto", sans-serif;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+}

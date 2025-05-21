@@ -1,0 +1,247 @@
+$ellipse65: url('../asset/Ellipse 65.png');
+
+// Common styles for all pages
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+  width: 100%;
+
+  .page-body {
+    margin-left: 69px;
+  }
+
+  .page-content {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    padding: 36px 23px;
+    gap: 20px;
+    flex: 1;
+    overflow-y: auto;
+
+    h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #000;
+      font-family: "Roboto", sans-serif;
+      opacity: 0.6;
+    }
+  }
+}
+
+// Common table styles
+.table-container {
+  width: 100%;
+  box-sizing: border-box;
+
+  .table {
+    border-spacing: 0px;
+    width: 100%;
+
+    th {
+      padding: 12px 10px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background: #f2f3f5;
+      border-bottom: none;
+      border-right: none;
+
+      &:last-child {
+        border-right: 1px solid rgba(0, 0, 0, 0.2);
+      }
+
+      span {
+        color: #000;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-align: left;
+        opacity: 0.6;
+      }
+    }
+
+    td {
+      padding: 12px 10px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-bottom: none;
+      border-right: none;
+
+      &:last-child {
+        border-right: 1px solid rgba(0, 0, 0, 0.2);
+      }
+
+      span {
+        color: #000;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 10px 17px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: rgba(217, 225, 231, 0.3);
+
+    .table-total {
+      color: #000;
+      font-family: "Roboto", sans-serif;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+    }
+
+    .table-pagination {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .ant-pagination-options {
+        display: none;
+      }
+
+      .ant-pagination {
+        font-size: 12px !important;
+
+        .ant-pagination-item {
+          line-height: 32px;
+
+          &:hover {
+            transition: all 0.2s;
+            background-color: rgba(0, 0, 0, 0.06);
+            border-radius: 100px;
+          }
+
+          &.ant-pagination-item-active {
+            border-radius: 100px;
+            border: 1px solid #0f51aa;
+            background: #0f51aa;
+
+            a {
+              color: #fff;
+              font-family: Roboto;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Common menu styles
+.menu-container {
+  display: flex;
+  height: 60px;
+  padding: 0px 20px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+  .menu-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    .menu-item {
+      opacity: 0.6;
+      color: #000;
+      font-family: "Roboto", sans-serif;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+
+      &.active {
+        position: relative;
+        color: #c10a11;
+        font-weight: 500;
+        opacity: 1;
+
+        &::after {
+          content: "";
+          background-image: $ellipse65;
+          position: absolute;
+          bottom: -50%;
+          left: 44%;
+          width: 8px;
+          height: 8px;
+        }
+      }
+    }
+  }
+
+  .menu-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .menu-search {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .menu-input {
+        border-radius: 8px;
+        border: 1px solid rgba(15, 81, 170, 0.3);
+        background: #fff;
+        padding: 6px 6px 6px 30px;
+
+        &::placeholder {
+          color: #00143a;
+          font-family: "Roboto", sans-serif;
+          font-size: 11px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          opacity: 0.8;
+        }
+
+        &:focus-visible {
+          outline: none;
+        }
+      }
+    }
+
+    .menu-excel {
+      display: flex;
+      padding: 3px 8px;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      border-radius: 2px;
+      border: 0.5px solid #0f51aa;
+      background: rgba(240, 249, 255, 0.48);
+
+      span {
+        color: #0f51aa;
+        font-family: "Roboto", sans-serif;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.ellipse-bg {
+  background-image: $ellipse65;
+} 

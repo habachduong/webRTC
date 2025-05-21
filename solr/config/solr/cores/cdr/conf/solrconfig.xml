@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <luceneMatchVersion>8.11.2</luceneMatchVersion>
+    <directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.NRTCachingDirectoryFactory}"/>
+    
+    <!-- AutoCommit settings -->
+    <autoCommit>
+        <maxTime>${solr.autoCommit.maxTime:15000}</maxTime>
+        <maxDocs>${solr.autoCommit.maxDocs:1000}</maxDocs>
+        <openSearcher>false</openSearcher>
+    </autoCommit>
+    
+    <!-- AutoSoftCommit settings -->
+    <autoSoftCommit>
+        <maxTime>${solr.autoSoftCommit.maxTime:1000}</maxTime>
+    </autoSoftCommit>
+
+    <!-- Request Handlers -->
+    <requestHandler name="/select" class="solr.SearchHandler">
+        <lst name="defaults">
+            <str name="echoParams">explicit</str>
+            <str name="wt">json</str>
+            <str name="indent">true</str>
+            <str name="df">text</str>
+            <str name="rows">10</str>
+            <str name="fl">*,score</str>
+        </lst>
+        <arr name="last-components">
+            <str>spellcheck</str>
+            <str>highlight</str>
+        </arr>
+    </requestHandler>
+
+    <!-- Update Request Handler -->
+    <requestHandler name="/update" class="solr.UpdateRequestHandler">
+        <lst name="defaults">
+            <str name="update.chain">deduplication</str>
+        </lst>
+    </requestHandler>
+
+    <!-- Deduplication Update Chain -->
+    <updateRequestProcessorChain name="deduplication">
+        <processor class="solr.processor.SignatureUpdateProcessorFactory">
+            <bool name="enabled">true</bool>
+            <str name="signatureField">id</str>
+            <bool name="overwriteDupes">false</bool>
+            <str name="fields">call_id,source_number,destination_number,start_time</str>
+            <str name="signatureClass">solr.processor.Lookup3Signature</str>
+        </processor>
+        <processor class="solr.LogUpdateProcessorFactory"/>
+        <processor class="solr.RunUpdateProcessorFactory"/>
+    </updateRequestProcessorChain>
+
+    <!-- Query Response Writer -->
+    <queryResponseWriter name="json" class="solr.JSONResponseWriter">
+        <str name="content-type">application/json; charset=UTF-8</str>
+    </queryResponseWriter>
+
+    <!-- Cache settings -->
+    <query>
+        <filterCache class="solr.FastLRUCache" size="512" initialSize="512" autowarmCount="128"/>
+        <queryResultCache class="solr.LRUCache" size="512" initialSize="512" autowarmCount="128"/>
+        <documentCache class="solr.LRUCache" size="512" initialSize="512"/>
+        <fieldValueCache class="solr.FastLRUCache" size="512" autowarmCount="128" showItems="32"/>
+    </query>
+
+    <!-- Field Value Cache -->
+    <fieldValueCache class="solr.FastLRUCache" autowarmCount="128" size="512" showItems="32"/>
+
+    <!-- JMX -->
+    <jmx />
+    
+    <!-- Admin Handlers -->
+    <requestHandler name="/admin/" class="solr.admin.AdminHandlers" />
+    <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
+        <lst name="invariants">
+            <str name="qt">/select</str>
+            <str name="q">*:*</str>
+        </lst>
+    </requestHandler>
+</config> 

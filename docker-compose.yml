@@ -1,0 +1,202 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_API_URL=http://localhost:5000/api
+      - REACT_APP_WSO2_IS_URL=https://localhost:9443
+      - REACT_APP_WSO2_CLIENT_ID=${WSO2_CLIENT_ID}
+      - REACT_APP_WSO2_CLIENT_SECRET=${WSO2_CLIENT_SECRET}
+      - REACT_APP_WSO2_REDIRECT_URI=http://localhost:3000/api/auth/callback
+    command: npm start
+    depends_on:
+      - backend
+      - wso2is
+    networks:
+      - telesystem-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - DATABASE_URL=mysql://root:root@mysql:3306/mcp
+      - SECRET_KEY=your-secret-key-here
+      - JWT_SECRET_KEY=your-jwt-secret-key-here
+      - WSO2_URL=https://wso2is:9443
+      - WSO2_CLIENT_ID=${WSO2_CLIENT_ID}
+      - WSO2_CLIENT_SECRET=${WSO2_CLIENT_SECRET}
+      - WSO2_REDIRECT_URI=http://localhost:5000/api/auth/callback
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=telesystem
+      - MYSQL_PASSWORD=telesystem123
+      - MYSQL_DATABASE=telesystem
+      - WSO2_IS_URL=https://wso2is:9443
+      - WSO2_IS_TOKEN_URL=https://wso2is:9443/oauth2/token
+      - WSO2_IS_AUTH_URL=https://wso2is:9443/oauth2/authorize
+      - WSO2_IS_USERINFO_URL=https://wso2is:9443/oauth2/userinfo
+      - WSO2_IS_LOGOUT_URL=https://wso2is:9443/oidc/logout
+      - WSO2_IS_CALLBACK_URL=http://localhost:3000/api/auth/callback
+      - SOLR_HOST=${SOLR_HOST:-solr}
+      - SOLR_PORT=${SOLR_PORT:-8983}
+      - SOLR_CORE=${SOLR_CORE:-cdr}
+      - SOLR_USERNAME=${SOLR_USERNAME:-}
+      - SOLR_PASSWORD=${SOLR_PASSWORD:-}
+      - SOLR_SSL_ENABLED=${SOLR_SSL_ENABLED:-false}
+      - SOLR_SSL_VERIFY=${SOLR_SSL_VERIFY:-false}
+      - SOLR_CONNECTION_TIMEOUT=${SOLR_CONNECTION_TIMEOUT:-5000}
+      - SOLR_SOCKET_TIMEOUT=${SOLR_SOCKET_TIMEOUT:-30000}
+      - SOLR_URL=${SOLR_URL:-http://${SOLR_HOST:-solr}:${SOLR_PORT:-8983}/solr/${SOLR_CORE:-cdr}}
+      # Redis Configuration
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      - REDIS_DB=${REDIS_DB:-0}
+      - REDIS_SSL_ENABLED=${REDIS_SSL_ENABLED:-false}
+      - REDIS_SSL_VERIFY=${REDIS_SSL_VERIFY:-false}
+      - REDIS_SOCKET_TIMEOUT=${REDIS_SOCKET_TIMEOUT:-5}
+      - REDIS_SOCKET_CONNECT_TIMEOUT=${REDIS_SOCKET_CONNECT_TIMEOUT:-5}
+      - REDIS_RETRY_ON_TIMEOUT=${REDIS_RETRY_ON_TIMEOUT:-true}
+      - REDIS_MAX_CONNECTIONS=${REDIS_MAX_CONNECTIONS:-10}
+      - REDIS_URL=${REDIS_URL:-redis://${REDIS_HOST:-redis}:${REDIS_PORT:-6379}/${REDIS_DB:-0}}
+    depends_on:
+      - mysql
+      - wso2is
+      - solr
+      - redis
+    networks:
+      - telesystem-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: telesystem
+      MYSQL_USER: telesystem
+      MYSQL_PASSWORD: telesystem123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./wso2is/config/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - telesystem-network
+
+  wso2is:
+    image: wso2/wso2is:7.0.0
+    container_name: wso2is
+    restart: always
+    ports:
+      - "9443:9443"
+      - "9763:9763"
+      - "8243:8243"
+      - "8280:8280"
+    environment:
+      - WSO2IS_DB_HOST=mysql
+      - WSO2IS_DB_PORT=3306
+      - WSO2IS_DB_USER=wso2is
+      - WSO2IS_DB_PASSWORD=wso2is123
+    volumes:
+      - ./wso2is/config/master-datasources.xml:/home/wso2carbon/wso2is-7.0.0/repository/conf/datasources/master-datasources.xml
+      - wso2is_data:/home/wso2carbon/wso2is-7.0.0/repository/data
+      - wso2is_logs:/home/wso2carbon/wso2is-7.0.0/repository/logs
+    depends_on:
+      - mysql
+    networks:
+      - telesystem-network
+
+  solr:
+    image: solr:8.11.2
+    container_name: solr
+    restart: always
+    ports:
+      - "8983:8983"
+    environment:
+      - SOLR_HEAP=2048m
+      - SOLR_JAVA_MEM="-Xms1024m -Xmx2048m"
+      - GC_TUNE="-XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+ParallelRefProcEnabled -XX:+PerfDisableSharedMem -XX:+ExplicitGCInvokesConcurrent -XX:HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/var/solr/logs -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintGCCause"
+      - SOLR_OPTS="-Dsolr.autoSoftCommit.maxTime=1000 -Dsolr.autoCommit.maxTime=15000 -Dsolr.autoCommit.maxDocs=1000"
+    volumes:
+      - ./solr/config/solr:/opt/solr/server/solr
+      - solr_data:/opt/solr/server/solr/cdr/data
+      - solr_logs:/opt/solr/server/logs
+    command: solr-precreate cdr /opt/solr/server/solr/cdr/conf
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    networks:
+      - telesystem-network
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD:-} --maxmemory 512mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+      - redis_config:/usr/local/etc/redis
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    networks:
+      - telesystem-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certificate.crt:/etc/nginx/certificate.crt:ro
+      - ./nginx/privkey.key:/etc/nginx/privkey.key:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - telesystem-network
+
+volumes:
+  mysql_data:
+  wso2is_data:
+  wso2is_logs:
+  solr_data:
+  solr_logs:
+  redis_data:
+  redis_config:
+
+networks:
+  telesystem-network:
+    driver: bridge
+
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
+    <providers>
+        <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
+    </providers>
+    <datasources>
+        <datasource>
+            <name>WSO2_CARBON_DB</name>
+            <description>The datasource used for registry and user manager</description>
+            <jndiConfig>
+                <name>jdbc/WSO2CarbonDB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:mysql://mysql:3306/wso2is_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;autoReconnect=true</url>
+                    <username>wso2is</username>
+                    <password>wso2is123</password>
+                    <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
+                    <maxPoolSize>50</maxPoolSize>
+                    <minIdle>5</minIdle>
+                    <maxIdle>10</maxIdle>
+                    <defaultAutoCommit>false</defaultAutoCommit>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <testOnBorrow>true</testOnBorrow>
+                </configuration>
+            </definition>
+        </datasource>
+        <datasource>
+            <name>WSO2_USER_DB</name>
+            <description>The datasource used for user management</description>
+            <jndiConfig>
+                <name>jdbc/WSO2UserDB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:mysql://mysql:3306/wso2is_user_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;autoReconnect=true</url>
+                    <username>wso2is</username>
+                    <password>wso2is123</password>
+                    <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
+                    <maxPoolSize>50</maxPoolSize>
+                    <minIdle>5</minIdle>
+                    <maxIdle>10</maxIdle>
+                    <defaultAutoCommit>false</defaultAutoCommit>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <testOnBorrow>true</testOnBorrow>
+                </configuration>
+            </definition>
+        </datasource>
+        <datasource>
+            <name>WSO2_IDENTITY_DB</name>
+            <description>The datasource used for identity management</description>
+            <jndiConfig>
+                <name>jdbc/WSO2IdentityDB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:mysql://mysql:3306/wso2is_identity_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;autoReconnect=true</url>
+                    <username>wso2is</username>
+                    <password>wso2is123</password>
+                    <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
+                    <maxPoolSize>50</maxPoolSize>
+                    <minIdle>5</minIdle>
+                    <maxIdle>10</maxIdle>
+                    <defaultAutoCommit>false</defaultAutoCommit>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <testOnBorrow>true</testOnBorrow>
+                </configuration>
+            </definition>
+        </datasource>
+        <datasource>
+            <name>WSO2_CONSENT_DB</name>
+            <description>The datasource used for consent management</description>
+            <jndiConfig>
+                <name>jdbc/WSO2ConsentDB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:mysql://mysql:3306/wso2is_consent_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;autoReconnect=true</url>
+                    <username>wso2is</username>
+                    <password>wso2is123</password>
+                    <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
+                    <maxPoolSize>50</maxPoolSize>
+                    <minIdle>5</minIdle>
+                    <maxIdle>10</maxIdle>
+                    <defaultAutoCommit>false</defaultAutoCommit>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <testOnBorrow>true</testOnBorrow>
+                </configuration>
+            </definition>
+        </datasource>
+    </datasources>
+</datasources-configuration> 
