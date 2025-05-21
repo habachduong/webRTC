@@ -1,5 +1,5 @@
 .Summary {
-  padding: 35px 60px 32px 34px;
+  padding: 15px 20px 12px 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
   .Summary-title {
@@ -11,8 +11,8 @@
   .Summary-name {
     opacity: 0.6;
     color: #000;
-    font-family: "Roboto", sans-serif;
-    font-size: 32px;
+    font-family: "Roboto";
+    font-size: 24px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -26,7 +26,7 @@
     background: #eee;
     p {
       color: #000;
-      font-family: "Roboto", sans-serif;
+      font-family: "Roboto";
       font-size: 13px;
       font-style: normal;
       font-weight: 400;
@@ -53,7 +53,7 @@
     span {
       margin: 0;
       color: #000;
-      font-family: "Roboto", sans-serif;
+      font-family: "Roboto";
       font-size: 13px;
       font-style: normal;
       font-weight: 400;
@@ -64,7 +64,7 @@
   }
   .Summary-number {
     color: #000;
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto";
     font-size: 48px;
     font-style: normal;
     font-weight: 600;
