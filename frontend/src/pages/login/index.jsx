@@ -13,7 +13,7 @@ import { setRemember } from "../../reducers/appReduce";
 import { setMenuActive } from "../../reducers/dashboard";
 import eyeOpen from '../../asset/eye.png';
 import eyeClose from '../../asset/eye-close.png';
-import logo from '../../asset/logo.png';
+import logo from '../../asset/logo 2.png';
 import "./index.scss";
 
 const Login = () => {
